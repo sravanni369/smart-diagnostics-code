@@ -203,7 +203,12 @@ Captured from VS Code on the machine that ran the code (`outputs/screenshots/`).
 ![ColumnTransformer bug](outputs/screenshots/02_ch06_columntransformer_bug.png)
 
 Also in `outputs/screenshots/`: compressor training output, the MLP-vs-FCC comparison,
-the 13/13 test run, and the ported KSB/Gülich source.
+the 13/13 test run, the ported KSB/Gülich source, and both seeded hyperparameter
+searches (`07_ch05_bayesian_tuner.png`, `08_ch06_tuner_search.png`).
+
+All eight are captured with `PrintWindow(PW_RENDERFULLCONTENT)` so they show VS Code's own
+content rather than whatever happened to be on screen, and each was checked for private
+content before committing.
 
 Plot output is in `outputs/figures/` and terminal transcripts in `outputs/logs/`.
 
