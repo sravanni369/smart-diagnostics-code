@@ -1,7 +1,7 @@
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604261.648462   37312 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785611164.600361   19816 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604264.751606   37312 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785611167.017638   19816 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
 ==============================================================================
 Ch.5 Reciprocating compressor — multi-label fault classification
@@ -29,21 +29,21 @@ Training for 100 epochs ...
 done.
 
 Final epoch:
-  loss       train=0.0018   val=0.0522
-  accuracy   train=0.5186   val=0.4733
-  precision  train=1.0000   val=0.9804
-  recall     train=1.0000   val=0.9524
-  auc        train=1.0000   val=0.9895
+  loss       train=0.0022   val=0.0365
+  accuracy   train=0.5943   val=0.6000
+  precision  train=1.0000   val=0.9806
+  recall     train=1.0000   val=0.9619
+  auc        train=1.0000   val=0.9944
 
 Accuracy per label:
   bearings   0.9867
   wpump      0.9667
   radiator   0.9867
-  exvalve    0.9667
-  average    0.9767
+  exvalve    0.9733
+  average    0.9783
 
-Accuracy per row (all 4 labels correct): 0.9133
-Macro F1: 0.9435
+Accuracy per row (all 4 labels correct): 0.9200
+Macro F1: 0.9473
 
 Classification report:
               precision    recall  f1-score   support
@@ -51,12 +51,12 @@ Classification report:
     bearings       1.00      0.94      0.97        32
        wpump       1.00      0.83      0.91        30
     radiator       0.97      0.97      0.97        31
-     exvalve       0.94      0.92      0.93        36
+     exvalve       0.94      0.94      0.94        36
 
-   micro avg       0.98      0.91      0.94       129
-   macro avg       0.98      0.91      0.94       129
-weighted avg       0.98      0.91      0.94       129
- samples avg       0.58      0.57      0.57       129
+   micro avg       0.98      0.92      0.95       129
+   macro avg       0.98      0.92      0.95       129
+weighted avg       0.98      0.92      0.95       129
+ samples avg       0.59      0.58      0.58       129
 
 figures: ch05_training_history.png, ch05_confusion_matrices.png
 

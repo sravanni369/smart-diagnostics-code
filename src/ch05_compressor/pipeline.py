@@ -141,6 +141,10 @@ def main():
     print("*** SYNTHETIC DATA — not the authors' dataset, not their results ***")
     print("=" * 78)
 
+    # Seed weight init / shuffling so a rerun reproduces these numbers. The book does
+    # not do this, which is why its results are not reproducible run-to-run.
+    keras.utils.set_random_seed(RANDOM_STATE)
+
     (xtr, ytr), (xva, yva), (xte, yte) = load_and_preprocess()
     print(f"\nsplit: train={len(xtr)}  val={len(xva)}  test={len(xte)}  features={xtr.shape[1]}")
 

@@ -1,7 +1,7 @@
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604278.474311   32840 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785611178.506289   23856 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604281.569443   32840 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785611180.892788   23856 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
 ==============================================================================
 Ch.6 ESP head estimation — MLP vs FCC
@@ -26,11 +26,11 @@ Model: "MLP"
  Trainable params: 161 (644.00 B)
  Non-trainable params: 0 (0.00 B)
   trainable parameters : 161
-  MAE  : 0.4718 ft
-  RMSE : 0.6745 ft
-  MAPE : 1.74 %
-  R2   : 0.9980
-  within +/-10% band : 100.0 %
+  MAE  : 0.8684 ft
+  RMSE : 1.2420 ft
+  MAPE : 3.53 %
+  R2   : 0.9934
+  within +/-10% band : 93.3 %
 
 --- FCC ---
 Model: "FCC"
@@ -59,16 +59,16 @@ Model: "FCC"
  Trainable params: 204 (816.00 B)
  Non-trainable params: 0 (0.00 B)
   trainable parameters : 204
-  MAE  : 0.5445 ft
-  RMSE : 0.7395 ft
-  MAPE : 2.11 %
-  R2   : 0.9976
-  within +/-10% band : 99.4 %
+  MAE  : 0.5434 ft
+  RMSE : 0.6940 ft
+  MAPE : 2.42 %
+  R2   : 0.9979
+  within +/-10% band : 98.3 %
 
 ==============================================================================
-model  params      mae     rmse     mape       r2   within10
-  MLP     161 0.471751 0.674487 1.743423 0.998039 100.000000
-  FCC     204 0.544480 0.739512 2.110610 0.997642  99.444444
+model  params      mae     rmse     mape       r2  within10
+  MLP     161 0.868367 1.241954 3.527796 0.993350 93.333333
+  FCC     204 0.543441 0.693983 2.423062 0.997924 98.333333
 
 figures: ch06_predictions.png, ch06_training_history.png
 

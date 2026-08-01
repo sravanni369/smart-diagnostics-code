@@ -73,9 +73,23 @@ original typos included — so the audit can be checked against the source.
 
 ## Running it
 
+Use a virtual environment — TensorFlow pulls in a large dependency tree and should not
+go into a system Python.
+
+Windows:
+
 ```bash
-pip install -r requirements.txt
+python -m venv .venv && .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+macOS / Linux:
+
+```bash
+python3 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt
+```
+
+Then run the modules with the venv's interpreter (`.venv\Scripts\python.exe` on Windows,
+`.venv/bin/python` elsewhere) — shown below as `python` for brevity.
 
 ```bash
 python src/ch10_ksb_gulich/ksb_gulich_python.py
@@ -99,8 +113,8 @@ python classic_problems/fizzbuzz.py
 python classic_problems/test_classic.py
 ```
 
-Environment used: Windows 11, Python 3.13.5, TensorFlow 2.21.0, Keras 3.15.1,
-keras-tuner 1.4.8, scikit-learn 1.8.0.
+Environment used: Windows 11, Python 3.13.5 in a venv, TensorFlow 2.21.0, Keras 3.15.1,
+keras-tuner 1.4.8, scikit-learn 1.9.0, numpy 2.5.1, pandas 3.0.5, matplotlib 3.11.1.
 The book's Chapter 6 ran on Python 3.11.13 / TF 2.18.0 / Keras 3.8.0 (printed p.133).
 
 ---
@@ -133,10 +147,10 @@ The architecture is exactly as printed: `20 → Dense(41, relu) → Dense(21, re
 Dense(4, sigmoid)`, binary cross-entropy, Adam, multi-label over bearings / water pump /
 radiator / discharge valve.
 
-On synthetic data: 0.982 mean per-label accuracy, 0.927 per-row accuracy, 0.954 macro
-F1. Bayesian tuning selected (24, 16) units against the baseline (41, 21) — a 46.9%
-parameter reduction, which echoes the chapter's "reduced the number of parameters by
-almost half" (printed p.97). The echo is qualitative only; the data is invented.
+On synthetic data: 0.920 per-row accuracy and 0.947 macro F1. Bayesian tuning selected
+(16, 16) units against the baseline (41, 21) — a 63.1% parameter reduction, comfortably
+past the chapter's "reduced the number of parameters by almost half" (printed p.97).
+The echo is qualitative only; the data is invented.
 
 ### Chapter 6 — ESP head estimation
 
@@ -145,11 +159,18 @@ input and all previous hidden layers.
 
 | model | params | MAE (ft) | RMSE (ft) | MAPE | R² | within ±10% |
 |-------|--------|----------|-----------|------|-----|-------------|
-| MLP | 161 | 0.734 | 1.079 | 2.63% | 0.995 | 98.3% |
-| FCC | 204 | 0.430 | 0.576 | 1.64% | 0.999 | 99.4% |
+| MLP | 161 | 0.868 | 1.242 | 3.53% | 0.993 | 93.3% |
+| FCC | 204 | 0.543 | 0.694 | 2.42% | 0.998 | 98.3% |
 
 FCC beating MLP on raw error matches the chapter's own observation (printed p.133) —
 again, qualitative agreement on synthetic data, not a reproduction.
+
+> **On reproducibility.** The book seeds its train/test split but not TensorFlow's weight
+> initialisation, so its network results cannot be reproduced run-to-run — I watched the
+> figures above move on every retrain before pinning them. Both pipelines here call
+> `keras.utils.set_random_seed(...)`, so the numbers in this table and in
+> `outputs/logs/` are reproducible: rerun and you get them back exactly. The tuner
+> scripts remain unseeded and may still select different architectures between runs.
 
 The synthetic generator is not noise: it uses the pump affinity laws, which the book's
 own BEP table obeys exactly (1388.6 × 3500/1800 = 2700.0 against the book's 2700), and

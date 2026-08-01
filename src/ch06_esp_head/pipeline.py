@@ -183,6 +183,9 @@ def main():
     results, histories, metric_rows = [], [], []
     for name, builder in [("MLP", build_mlp), ("FCC", build_fcc)]:
         print(f"\n--- {name} ---")
+        # Reseed before each build so both models start from a reproducible state and
+        # the comparison between them is not luck of initialisation.
+        tf.keras.utils.set_random_seed(RND_SEED)
         model = builder()
         model.summary()
         hist = model.fit(

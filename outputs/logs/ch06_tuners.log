@@ -1,13 +1,13 @@
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604683.889234   18976 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785609151.685855   37780 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785604687.006441   18976 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1785609153.740861   37780 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
-WARNING:tensorflow:From C:\Users\laksh\AppData\Local\Programs\Python\Python313\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+WARNING:tensorflow:From C:\Users\laksh\projects\smart-diagnostics-code\.venv\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
 
-C:\Users\laksh\AppData\Local\Programs\Python\Python313\Lib\site-packages\keras\src\saving\saving_lib.py:869: UserWarning: Skipping variable loading for optimizer 'adam', because it has 2 variables whereas the saved optimizer has 14 variables. 
+C:\Users\laksh\projects\smart-diagnostics-code\.venv\Lib\site-packages\keras\src\saving\saving_lib.py:869: UserWarning: Skipping variable loading for optimizer 'adam', because it has 2 variables whereas the saved optimizer has 10 variables. 
   saveable.load_own_variables(store)
-C:\Users\laksh\AppData\Local\Programs\Python\Python313\Lib\site-packages\keras\src\saving\saving_lib.py:869: UserWarning: Skipping variable loading for optimizer 'adam', because it has 2 variables whereas the saved optimizer has 10 variables. 
+C:\Users\laksh\projects\smart-diagnostics-code\.venv\Lib\site-packages\keras\src\saving\saving_lib.py:869: UserWarning: Skipping variable loading for optimizer 'adam', because it has 2 variables whereas the saved optimizer has 14 variables. 
   saveable.load_own_variables(store)
 ==============================================================================
 Ch.6 hyperparameter search — MLP and FCC (printed pp.136-137)
@@ -16,43 +16,43 @@ budget: 10 trials x 40 epochs  (REDUCED, see C6-4)
 ==============================================================================
 
 --- MLP / RandomSearch ---
-  hidden layers   : 2
-  units           : [10, 6]
-  activations     : ['relu', 'relu']
-  output act.     : relu
-  parameters      : 113
-  best val MAE    : 0.012165 (normalised)
-
---- MLP / BayesianOptimization ---
   hidden layers   : 1
-  units           : [10]
+  units           : [7]
   activations     : ['relu']
   output act.     : relu
-  parameters      : 51
-  best val MAE    : 0.027369 (normalised)
+  parameters      : 36
+  best val MAE    : 0.016782 (normalised)
+
+--- MLP / BayesianOptimization ---
+  hidden layers   : 2
+  units           : [10, 10]
+  activations     : ['tanh', 'relu']
+  output act.     : relu
+  parameters      : 161
+  best val MAE    : 0.021331 (normalised)
 
 --- FCC / RandomSearch ---
   hidden layers   : 2
-  units           : [3, 10]
-  activations     : ['relu', 'tanh']
-  output act.     : relu
-  parameters      : 99
-  best val MAE    : 0.021154 (normalised)
+  units           : [6, 5]
+  activations     : ['tanh', 'relu']
+  output act.     : tanh
+  parameters      : 89
+  best val MAE    : 0.024537 (normalised)
 
 --- FCC / BayesianOptimization ---
   hidden layers   : 2
-  units           : [8, 7]
-  activations     : ['relu', 'tanh']
-  output act.     : tanh
-  parameters      : 135
-  best val MAE    : 0.028758 (normalised)
+  units           : [7, 9]
+  activations     : ['relu', 'relu']
+  output act.     : relu
+  parameters      : 147
+  best val MAE    : 0.014233 (normalised)
 
 ==============================================================================
-architecture            algorithm  num_layers   units      activations output_activation  params  val_mae
-         MLP         RandomSearch           2 [10, 6] ['relu', 'relu']              relu     113 0.012165
-         MLP BayesianOptimization           1    [10]         ['relu']              relu      51 0.027369
-         FCC         RandomSearch           2 [3, 10] ['relu', 'tanh']              relu      99 0.021154
-         FCC BayesianOptimization           2  [8, 7] ['relu', 'tanh']              tanh     135 0.028758
+architecture            algorithm  num_layers    units      activations output_activation  params  val_mae
+         MLP         RandomSearch           1      [7]         ['relu']              relu      36 0.016782
+         MLP BayesianOptimization           2 [10, 10] ['tanh', 'relu']              relu     161 0.021331
+         FCC         RandomSearch           2   [6, 5] ['tanh', 'relu']              tanh      89 0.024537
+         FCC BayesianOptimization           2   [7, 9] ['relu', 'relu']              relu     147 0.014233
 
 saved: ch06_tuning_summary.csv
 
