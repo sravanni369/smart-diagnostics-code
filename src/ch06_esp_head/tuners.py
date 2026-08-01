@@ -31,7 +31,7 @@ from keras_tuner.tuners import BayesianOptimization, RandomSearch
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pipeline import preprocess     # noqa: E402
+from pipeline import RND_SEED, preprocess     # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -93,11 +93,20 @@ def main():
 
     rows = []
     for arch, builder in [("MLP", build_model_mlp), ("FCC", build_model_fcc)]:
-        for algo_name, algo in [("RandomSearch", RandomSearch),
-                                ("BayesianOptimization", BayesianOptimization)]:
+        for algo_offset, (algo_name, algo) in enumerate(
+                [("RandomSearch", RandomSearch),
+                 ("BayesianOptimization", BayesianOptimization)]):
+            # Each (architecture, algorithm) gets its own fixed seed. Reusing ONE seed
+            # across both algorithms makes them walk the same trial sequence and return
+            # identical results at this small budget, which would fake an agreement
+            # that isn't there. Distinct fixed seeds keep each run reproducible while
+            # letting the two searches actually differ.
+            seed = RND_SEED + algo_offset
             directory = ROOT / "outputs" / "tuning" / "ch06" / f"{arch}_{algo_name}"
             if directory.exists():
                 shutil.rmtree(directory)
+
+            tf.keras.utils.set_random_seed(seed)
 
             tuner = algo(
                 builder,
@@ -105,6 +114,7 @@ def main():
                 max_trials=args.trials,
                 directory=str(directory),
                 project_name="search",
+                seed=seed,
             )
             print(f"\n--- {arch} / {algo_name} ---")
             tuner.search(tr_x, tr_y, validation_data=(va_x, va_y),

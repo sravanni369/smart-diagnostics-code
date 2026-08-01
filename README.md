@@ -148,9 +148,9 @@ Dense(4, sigmoid)`, binary cross-entropy, Adam, multi-label over bearings / wate
 radiator / discharge valve.
 
 On synthetic data: 0.920 per-row accuracy and 0.947 macro F1. Bayesian tuning selected
-(16, 16) units against the baseline (41, 21) — a 63.1% parameter reduction, comfortably
-past the chapter's "reduced the number of parameters by almost half" (printed p.97).
-The echo is qualitative only; the data is invented.
+(28, 14) units against the baseline (41, 21) — 988 parameters against 1831, a 42.4%
+reduction, close to the chapter's "reduced the number of parameters by almost half"
+(printed p.97). The echo is qualitative only; the data is invented.
 
 ### Chapter 6 — ESP head estimation
 
@@ -166,11 +166,17 @@ FCC beating MLP on raw error matches the chapter's own observation (printed p.13
 again, qualitative agreement on synthetic data, not a reproduction.
 
 > **On reproducibility.** The book seeds its train/test split but not TensorFlow's weight
-> initialisation, so its network results cannot be reproduced run-to-run — I watched the
-> figures above move on every retrain before pinning them. Both pipelines here call
-> `keras.utils.set_random_seed(...)`, so the numbers in this table and in
-> `outputs/logs/` are reproducible: rerun and you get them back exactly. The tuner
-> scripts remain unseeded and may still select different architectures between runs.
+> initialisation, so its network results cannot be reproduced run-to-run — the figures
+> above moved on every retrain before being pinned. Everything here is now seeded
+> (`keras.utils.set_random_seed`, plus `seed=` on both tuners), so every number in this
+> README and in `outputs/logs/` comes back exactly on a rerun; each was verified by
+> running twice and diffing.
+>
+> The two tuner algorithms get *distinct* fixed seeds. Sharing one seed makes
+> RandomSearch and BayesianOptimization walk the same trial sequence and return
+> byte-identical results at this small budget — a fake agreement. With 10 trials over a
+> 2-hyperparameter space the comparison between the two is illustrative only; the
+> chapter used 150 trials.
 
 The synthetic generator is not noise: it uses the pump affinity laws, which the book's
 own BEP table obeys exactly (1388.6 × 3500/1800 = 2700.0 against the book's 2700), and

@@ -33,7 +33,7 @@ from tensorflow.keras.metrics import AUC, Precision, Recall
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pipeline import as_dataset, load_and_preprocess     # noqa: E402
+from pipeline import RANDOM_STATE, as_dataset, load_and_preprocess     # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -79,6 +79,10 @@ def main():
     if directory.exists():
         shutil.rmtree(directory)          # fresh search each run
 
+    # Seed both the search and weight init so a rerun selects the same architecture.
+    # The book does neither, so its tuning result is not reproducible.
+    keras.utils.set_random_seed(RANDOM_STATE)
+
     tuner = kt.BayesianOptimization(
         build_model,
         objective=kt.Objective("val_recall", direction="max"),
@@ -86,6 +90,7 @@ def main():
         executions_per_trial=args.executions,
         directory=str(directory),
         project_name="bayesian_tuning",
+        seed=RANDOM_STATE,
     )
 
     print("\nsearch space:")
