@@ -1,5 +1,5 @@
 ==============================================================================
-Issue C6-1 — ColumnTransformer silently reorders columns
+Issue C6-1 ï¿½ ColumnTransformer silently reorders columns
 Source: Rahman et al., printed p.134 (PDF p.141)
 ==============================================================================
 
@@ -30,7 +30,7 @@ But the book relabels them as:
  1.293372   1.550336  0.055122
 
 ------------------------------------------------------------------------------
-Proof — correlate each labelled column against the true source column:
+Proof ï¿½ correlate each labelled column against the true source column:
 label       book column tracks     correlation
 Speed       Speed                       1.0000   OK
 Viscosity   Flowrate                    1.0000   <-- MISLABELLED

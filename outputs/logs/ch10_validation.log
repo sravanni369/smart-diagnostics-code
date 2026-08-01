@@ -1,7 +1,5 @@
-C:\Users\laksh\projects\smart-diagnostics-code\src\ch10_ksb_gulich\ksb_gulich_python.py:128: RuntimeWarning: invalid value encountered in power
-  cq_ksb = np.exp(b * b_ksb * np.log(a / (52.933 * omega_s)) - c * (np.log10(b_ksb)) ** d)
 ==============================================================================
-KSB / Gulich viscosity correction — MATLAB -> Python port
+KSB / Gulich viscosity correction ï¿½ MATLAB -> Python port
 Source: Hadabi et al., printed pp. 277-281 (PDF pp. 284-288)
 ==============================================================================
 
@@ -34,10 +32,12 @@ This is a real reproduction of the authors' results, not synthetic data.
 
 ------------------------------------------------------------------------------
 Correction factors under the book's optimised parameters (PDF p.290):
-  Nelder-Mead            NOT EVALUABLE — 22 NaN values in [CQ_KSB, CH_KSB]
+  Nelder-Mead            NOT EVALUABLE ï¿½ 22 NaN values in [CQ_KSB, CH_KSB]
   Levenberg-Marquardt    mean CH_KSB=0.8306  mean CH_Gulich=0.7498
 
 See issue C10-1 in ISSUES_FOUND.md: with the published Nelder-Mead
 parameters (a=0.125) the KSB term B falls below 1 for 11 of the 16
 operating points, so log10(B) < 0 and (log10(B))**d with fractional d
 leaves the reals. numpy yields NaN; MATLAB silently yields complex.
+C:\Users\laksh\projects\smart-diagnostics-code\src\ch10_ksb_gulich\ksb_gulich_python.py:128: RuntimeWarning: invalid value encountered in power
+  cq_ksb = np.exp(b * b_ksb * np.log(a / (52.933 * omega_s)) - c * (np.log10(b_ksb)) ** d)

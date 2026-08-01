@@ -19,10 +19,11 @@ not the authors' compressor.
 
 from __future__ import annotations
 
-import os
+import sys
 from pathlib import Path
 
-os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")   # quieten TF banner
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import quiet_tf  # noqa: F401,E402  — must precede tensorflow; see src/quiet_tf.py
 
 import matplotlib
 matplotlib.use("Agg")

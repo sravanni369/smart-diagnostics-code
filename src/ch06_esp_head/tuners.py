@@ -17,11 +17,12 @@ DATA IS SYNTHETIC.
 from __future__ import annotations
 
 import argparse
-import os
 import shutil
+import sys
 from pathlib import Path
 
-os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import quiet_tf  # noqa: F401,E402  — must precede tensorflow; see src/quiet_tf.py
 
 import numpy as np
 import pandas as pd
@@ -29,7 +30,6 @@ import tensorflow as tf
 from keras_tuner import HyperParameters
 from keras_tuner.tuners import BayesianOptimization, RandomSearch
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pipeline import RND_SEED, preprocess     # noqa: E402
 

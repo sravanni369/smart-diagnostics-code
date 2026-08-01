@@ -88,8 +88,17 @@ macOS / Linux:
 python3 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt
 ```
 
-Then run the modules with the venv's interpreter (`.venv\Scripts\python.exe` on Windows,
-`.venv/bin/python` elsewhere) — shown below as `python` for brevity.
+Then run everything with one command:
+
+```bash
+python scripts/run_all.py
+```
+
+It executes all ten modules in order, writes `outputs/logs/`, and prints exit code,
+duration and line count per step (`--fast` skips the two hyperparameter searches).
+
+Or run modules individually with the venv's interpreter (`.venv\Scripts\python.exe` on
+Windows, `.venv/bin/python` elsewhere) — shown below as `python` for brevity.
 
 ```bash
 python src/ch10_ksb_gulich/ksb_gulich_python.py
@@ -211,6 +220,13 @@ content rather than whatever happened to be on screen, and each was checked for 
 content before committing.
 
 Plot output is in `outputs/figures/` and terminal transcripts in `outputs/logs/`.
+
+The logs contain program output only — TensorFlow's startup banner is suppressed.
+`src/quiet_tf.py` handles the Python-side loggers; the two `absl::InitializeLog` /
+oneDNN lines are written straight to file descriptor 2 by TF's C++ runtime *before* absl
+initialises, so no Python setting can gate them and `scripts/run_all.py` strips them from
+the captured stream instead. Only known-noise patterns are removed — anything
+unrecognised is kept, and a failing step prints its full unfiltered output.
 
 ---
 

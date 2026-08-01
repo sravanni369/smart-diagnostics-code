@@ -1,12 +1,7 @@
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785611509.472120   22408 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1785611512.072595   22408 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
 ==============================================================================
-Ch.6 ESP head estimation — MLP vs FCC
+Ch.6 ESP head estimation ï¿½ MLP vs FCC
 Appendices printed pp.134-137 (PDF pp.141-144)
-*** SYNTHETIC DATA — not the authors' dataset, not their results ***
+*** SYNTHETIC DATA ï¿½ not the authors' dataset, not their results ***
 ==============================================================================
 
 split: train=840  val=180  test=180
@@ -40,20 +35,20 @@ Model: "FCC"
 | layers_input        | (None, 3)         |          0 | -                 |
 | (InputLayer)        |                   |            |                   |
 |---------------------+-------------------+------------+-------------------|
-| layers_hidden_1     | (None, 10)        |         40 | layers_input[0][… |
+| layers_hidden_1     | (None, 10)        |         40 | layers_input[0][ï¿½ |
 | (Dense)             |                   |            |                   |
 |---------------------+-------------------+------------+-------------------|
-| concatenate         | (None, 13)        |          0 | layers_input[0][… |
-| (Concatenate)       |                   |            | layers_hidden_1[… |
+| concatenate         | (None, 13)        |          0 | layers_input[0][ï¿½ |
+| (Concatenate)       |                   |            | layers_hidden_1[ï¿½ |
 |---------------------+-------------------+------------+-------------------|
 | layers_hidden_2     | (None, 10)        |        140 | concatenate[0][0] |
 | (Dense)             |                   |            |                   |
 |---------------------+-------------------+------------+-------------------|
-| concatenate_1       | (None, 23)        |          0 | layers_input[0][… |
-| (Concatenate)       |                   |            | layers_hidden_1[… |
-|                     |                   |            | layers_hidden_2[… |
+| concatenate_1       | (None, 23)        |          0 | layers_input[0][ï¿½ |
+| (Concatenate)       |                   |            | layers_hidden_1[ï¿½ |
+|                     |                   |            | layers_hidden_2[ï¿½ |
 |---------------------+-------------------+------------+-------------------|
-| ouput_layer (Dense) | (None, 1)         |         24 | concatenate_1[0]… |
+| ouput_layer (Dense) | (None, 1)         |         24 | concatenate_1[0]ï¿½ |
 +--------------------------------------------------------------------------+
  Total params: 204 (816.00 B)
  Trainable params: 204 (816.00 B)

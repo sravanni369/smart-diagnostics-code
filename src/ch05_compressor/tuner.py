@@ -20,18 +20,18 @@ DATA IS SYNTHETIC — the "best" hyperparameters found describe the generator.
 from __future__ import annotations
 
 import argparse
-import os
 import shutil
+import sys
 from pathlib import Path
 
-os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import quiet_tf  # noqa: F401,E402  — must precede tensorflow; see src/quiet_tf.py
 
 import keras_tuner as kt          # C5-4
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras.metrics import AUC, Precision, Recall
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pipeline import RANDOM_STATE, as_dataset, load_and_preprocess     # noqa: E402
 
