@@ -1,0 +1,17 @@
+Running classic-problem tests (standalone, no pytest)
+
+  PASS  test_anagrams
+  PASS  test_fibonacci
+  PASS  test_fizzbuzz_custom_rules
+  PASS  test_fizzbuzz_first_fifteen
+  PASS  test_fizzbuzz_multiples
+  PASS  test_fizzbuzz_rejects_negative
+  PASS  test_fizzbuzz_zero_is_empty
+  PASS  test_lazy_matches_eager
+  PASS  test_naive_matches_rule_driven
+  PASS  test_palindrome
+  PASS  test_primes
+  PASS  test_reverse_words
+  PASS  test_two_sum
+
+13/13 passed

@@ -1,0 +1,23 @@
+======================================================================
+Classic problems
+======================================================================
+
+FizzBuzz, 1..20 (rule-driven):
+  1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz
+
+Same output from the naive branch version: True
+
+Extended with Bazz for 7, 1..21:
+  1 2 Fizz 4 Buzz Fizz Bazz 8 Fizz Buzz 11 Fizz 13 Bazz FizzBuzz 16 17 Fizz 19 Buzz FizzBazz
+  note 21 -> FizzBazz (3 and 7), 15 -> FizzBuzz (3 and 5)
+
+Lazy generator, first 15:
+  1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
+
+Others:
+  fibonacci(10)                    -> [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+  primes below 30                  -> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+  is_palindrome('Never odd or even') -> True
+  two_sum([2,7,11,15], 26)         -> (2, 3)
+  reverse_words('the sky is blue') -> 'blue is sky the'
+  anagrams('Dormitory','Dirty Room') -> True

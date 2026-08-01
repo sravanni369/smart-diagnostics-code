@@ -1,0 +1,33 @@
+SYNTHETIC ESP dataset written to: C:\Users\laksh\projects\smart-diagnostics-code\data\esp_head_synthetic.csv
+  rows=1200
+
+Ranges:
+            Speed   Viscosity     Flowrate       Head
+min   1800.000000   25.000000   354.136000   4.739000
+max   3500.000000  520.000000  3903.869000  63.780600
+mean  2678.583333  176.955833  1765.040949  28.333217
+
+Mean head by speed (should rise ~ N^2):
+Speed
+1800.0    11.59
+2400.0    21.08
+3000.0    33.73
+3500.0    46.80
+
+Mean head by viscosity (should fall as viscosity rises):
+Viscosity
+25.0     32.14
+63.0     29.73
+85.0     28.55
+90.0     30.79
+105.0    29.78
+107.0    29.04
+120.0    28.01
+130.0    28.61
+170.0    28.76
+240.0    25.02
+250.0    28.48
+380.0    27.06
+520.0    22.63
+
+REMINDER: invented data, physics-shaped. Not the authors' measurements.

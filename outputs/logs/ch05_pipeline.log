@@ -1,0 +1,64 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1785604261.648462   37312 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1785604264.751606   37312 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+==============================================================================
+Ch.5 Reciprocating compressor — multi-label fault classification
+Appendices printed pp.98-100 (PDF pp.105-107)
+*** SYNTHETIC DATA — not the authors' dataset, not their results ***
+==============================================================================
+
+split: train=700  val=150  test=150  features=20
+
+Model: "sequential"
++--------------------------------------------------------------------------+
+| Layer (type)                    | Output Shape           |       Param # |
+|---------------------------------+------------------------+---------------|
+| dense (Dense)                   | (None, 41)             |           861 |
+|---------------------------------+------------------------+---------------|
+| dense_1 (Dense)                 | (None, 21)             |           882 |
+|---------------------------------+------------------------+---------------|
+| dense_2 (Dense)                 | (None, 4)              |            88 |
++--------------------------------------------------------------------------+
+ Total params: 1,831 (7.15 KB)
+ Trainable params: 1,831 (7.15 KB)
+ Non-trainable params: 0 (0.00 B)
+
+Training for 100 epochs ...
+done.
+
+Final epoch:
+  loss       train=0.0018   val=0.0522
+  accuracy   train=0.5186   val=0.4733
+  precision  train=1.0000   val=0.9804
+  recall     train=1.0000   val=0.9524
+  auc        train=1.0000   val=0.9895
+
+Accuracy per label:
+  bearings   0.9867
+  wpump      0.9667
+  radiator   0.9867
+  exvalve    0.9667
+  average    0.9767
+
+Accuracy per row (all 4 labels correct): 0.9133
+Macro F1: 0.9435
+
+Classification report:
+              precision    recall  f1-score   support
+
+    bearings       1.00      0.94      0.97        32
+       wpump       1.00      0.83      0.91        30
+    radiator       0.97      0.97      0.97        31
+     exvalve       0.94      0.92      0.93        36
+
+   micro avg       0.98      0.91      0.94       129
+   macro avg       0.98      0.91      0.94       129
+weighted avg       0.98      0.91      0.94       129
+ samples avg       0.58      0.57      0.57       129
+
+figures: ch05_training_history.png, ch05_confusion_matrices.png
+
+REMINDER: synthetic data. The book reports 99% macro F1 / 100% recall
+on its real compressor data (printed p.97); these numbers are unrelated.

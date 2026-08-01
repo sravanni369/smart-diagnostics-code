@@ -1,0 +1,5 @@
+architecture,algorithm,num_layers,units,activations,output_activation,params,val_mae
+MLP,RandomSearch,2,"[10, 6]","['relu', 'relu']",relu,113,0.012165
+MLP,BayesianOptimization,1,[10],['relu'],relu,51,0.027369
+FCC,RandomSearch,2,"[3, 10]","['relu', 'tanh']",relu,99,0.021154
+FCC,BayesianOptimization,2,"[8, 7]","['relu', 'tanh']",tanh,135,0.028758

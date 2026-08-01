@@ -1,0 +1,40 @@
+==============================================================================
+Issue C6-1 — ColumnTransformer silently reorders columns
+Source: Rahman et al., printed p.134 (PDF p.141)
+==============================================================================
+
+Original input frame:
+ Speed  Viscosity  Flowrate
+1800.0       25.0    1763.0
+2400.0      107.0    1037.0
+3000.0      240.0    2247.0
+3500.0      520.0    1714.0
+
+Transformer emits columns in this order:
+  ['std__Speed', 'std__Flowrate', 'robust__Viscosity']
+But the book relabels them as:
+  ['Speed', 'Viscosity', 'Flowrate']
+
+--- AS PUBLISHED (mislabelled) ---
+    Speed  Viscosity  Flowrate
+-1.371758   0.168848 -0.664430
+-0.431124  -1.516152 -0.297539
+ 0.509510   1.292182  0.297539
+ 1.293372   0.055122  1.550336
+
+--- CORRECTED (labels follow the transformer) ---
+    Speed  Viscosity  Flowrate
+-1.371758  -0.664430  0.168848
+-0.431124  -0.297539 -1.516152
+ 0.509510   0.297539  1.292182
+ 1.293372   1.550336  0.055122
+
+------------------------------------------------------------------------------
+Proof — correlate each labelled column against the true source column:
+label       book column tracks     correlation
+Speed       Speed                       1.0000   OK
+Viscosity   Flowrate                    1.0000   <-- MISLABELLED
+Flowrate    Viscosity                   1.0000   <-- MISLABELLED
+
+Book's 'Viscosity' column differs from the true Viscosity: True
+Conclusion: 'Viscosity' and 'Flowrate' are transposed in the published code.

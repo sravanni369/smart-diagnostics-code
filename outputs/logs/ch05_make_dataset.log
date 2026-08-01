@@ -1,0 +1,10 @@
+SYNTHETIC compressor dataset written to: C:\Users\laksh\projects\smart-diagnostics-code\data\compressor_synthetic.csv
+  rows=1000  numeric features=20  labels=['bearings', 'wpump', 'radiator', 'exvalve']
+
+Fault prevalence (should be near 20%):
+  bearings   Noisy   19.0%
+  wpump      Noisy   19.5%
+  radiator   Dirty   20.7%
+  exvalve    Dirty   19.5%
+
+REMINDER: invented data. Downstream metrics are not the book's results.

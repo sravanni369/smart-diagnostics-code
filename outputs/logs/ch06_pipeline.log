@@ -1,0 +1,76 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1785604278.474311   32840 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1785604281.569443   32840 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+==============================================================================
+Ch.6 ESP head estimation — MLP vs FCC
+Appendices printed pp.134-137 (PDF pp.141-144)
+*** SYNTHETIC DATA — not the authors' dataset, not their results ***
+==============================================================================
+
+split: train=840  val=180  test=180
+
+--- MLP ---
+Model: "MLP"
++--------------------------------------------------------------------------+
+| Layer (type)                    | Output Shape           |       Param # |
+|---------------------------------+------------------------+---------------|
+| layers_hidden_1 (Dense)         | (None, 10)             |            40 |
+|---------------------------------+------------------------+---------------|
+| layers_hidden_2 (Dense)         | (None, 10)             |           110 |
+|---------------------------------+------------------------+---------------|
+| layers_output (Dense)           | (None, 1)              |            11 |
++--------------------------------------------------------------------------+
+ Total params: 161 (644.00 B)
+ Trainable params: 161 (644.00 B)
+ Non-trainable params: 0 (0.00 B)
+  trainable parameters : 161
+  MAE  : 0.4718 ft
+  RMSE : 0.6745 ft
+  MAPE : 1.74 %
+  R2   : 0.9980
+  within +/-10% band : 100.0 %
+
+--- FCC ---
+Model: "FCC"
++--------------------------------------------------------------------------+
+| Layer (type)        | Output Shape      |    Param # | Connected to      |
+|---------------------+-------------------+------------+-------------------|
+| layers_input        | (None, 3)         |          0 | -                 |
+| (InputLayer)        |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| layers_hidden_1     | (None, 10)        |         40 | layers_input[0][… |
+| (Dense)             |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| concatenate         | (None, 13)        |          0 | layers_input[0][… |
+| (Concatenate)       |                   |            | layers_hidden_1[… |
+|---------------------+-------------------+------------+-------------------|
+| layers_hidden_2     | (None, 10)        |        140 | concatenate[0][0] |
+| (Dense)             |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| concatenate_1       | (None, 23)        |          0 | layers_input[0][… |
+| (Concatenate)       |                   |            | layers_hidden_1[… |
+|                     |                   |            | layers_hidden_2[… |
+|---------------------+-------------------+------------+-------------------|
+| ouput_layer (Dense) | (None, 1)         |         24 | concatenate_1[0]… |
++--------------------------------------------------------------------------+
+ Total params: 204 (816.00 B)
+ Trainable params: 204 (816.00 B)
+ Non-trainable params: 0 (0.00 B)
+  trainable parameters : 204
+  MAE  : 0.5445 ft
+  RMSE : 0.7395 ft
+  MAPE : 2.11 %
+  R2   : 0.9976
+  within +/-10% band : 99.4 %
+
+==============================================================================
+model  params      mae     rmse     mape       r2   within10
+  MLP     161 0.471751 0.674487 1.743423 0.998039 100.000000
+  FCC     204 0.544480 0.739512 2.110610 0.997642  99.444444
+
+figures: ch06_predictions.png, ch06_training_history.png
+
+REMINDER: synthetic data. The book reports MAE < 0.6 ft and MAPE < 8%
+on its real ESP measurements (printed p.133); these numbers are unrelated.
